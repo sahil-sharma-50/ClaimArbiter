@@ -15,9 +15,13 @@ COPY pyproject.toml uv.lock README.md ./
 COPY agents agents/
 COPY gateway gateway/
 COPY seed seed/
+COPY entrypoint.sh ./
 
 RUN uv sync --frozen --no-dev
 
 EXPOSE 8080
 
-CMD ["uv", "run", "python", "gateway/main.py"]
+# entrypoint.sh copies a Render-mounted Secret File (agent_config.yaml) into /app
+# if present, then execs the gateway. See backend/entrypoint.sh for why this isn't
+# inlined into render.yaml's dockerCommand (Render execs that without a shell).
+CMD ["sh", "entrypoint.sh"]
