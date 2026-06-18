@@ -1,6 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nextjs",
-  "buildCommand": "next build",
-  "comment": "Set NEXT_PUBLIC_GATEWAY_URL in the Vercel project to the public URL of the ARBITER gateway the browser should reach (e.g. an ngrok/cloudflared tunnel to the locally-run gateway on :8080). The dashboard calls the gateway from the browser, so this must be reachable by the judge's browser, not just the server."
+  "buildCommand": "next build"
 }
