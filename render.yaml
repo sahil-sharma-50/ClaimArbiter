@@ -10,7 +10,7 @@
 #   - Environment secrets: AIML_API_KEY, FEATHERLESS_API_KEY,
 #                          HUMAN_REVIEWER_USER_ID, HUMAN_REVIEWER_USER_API_KEY
 #   - Secret File: filename "agent_config.yaml" (bare name — Render rejects slashes;
-#                  it mounts at /etc/secrets/, and dockerCommand below copies it to /app)
+#                  it mounts at /etc/secrets/, and entrypoint.sh copies it into /app)
 #
 # Free tier notes: the service spins down after 15 min idle (first request after
 # that takes ~1 min to wake), and free services can't mount a persistent disk — so
@@ -28,14 +28,11 @@ services:
     dockerContext: ./backend
     numInstances: 1          # NEVER scale — one Band connection per agent identity
     healthCheckPath: /api/health
-    # Render mounts Secret Files at /etc/secrets/<filename> (path is NOT configurable,
-    # and the filename field rejects slashes — so add the Secret File as the bare name
-    # "agent_config.yaml"). The gateway reads ./agent_config.yaml from its workdir
-    # (/app), so copy the mounted secret into place before launching.
-    # NOTE: Render already runs dockerCommand through a shell — do NOT wrap it in
-    # `sh -c "..."` yourself, or the nested quotes make the whole string one bogus
-    # command name (exit 127). Give the raw command; && and redirection work as-is.
-    dockerCommand: cp /etc/secrets/agent_config.yaml /app/agent_config.yaml && uv run python gateway/main.py
+    # No dockerCommand here on purpose. Render execs dockerCommand DIRECTLY (no shell),
+    # so multi-step forms like `cp ... && uv run ...` break (cp gets `&&` as an arg →
+    # exit 1). The Dockerfile CMD runs backend/entrypoint.sh instead, which copies the
+    # Render-mounted Secret File (/etc/secrets/agent_config.yaml) into /app and then
+    # execs the gateway — all inside a real shell.
     envVars:
       - key: GATEWAY_PORT
         value: "10000"       # Render's default injected port; gateway binds GATEWAY_PORT
