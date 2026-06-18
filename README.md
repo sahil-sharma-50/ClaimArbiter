@@ -1,35 +1,25 @@
-# ClaimArbiter
+<h1 align="center">
+  <img src="assets/logo.png" alt="ClaimArbiter" width="350" />
+</h1>
 
-**ClaimArbiter is a team of AI agents that handle an insurance claim from intake to a human's final sign-off.** The system reads the claim, classifies it, and recruits the right outside specialist (a property assessor, a medical reviewer, or a legal reviewer) to decide it, even when that specialist works at a different company.
+**ClaimArbiter is a team of AI agents that handle an insurance claim from intake to a human's final sign-off.**
 
 It runs on [**Band**](https://band.ai), a shared workspace where AI agents talk to each other, hand off work, and bring in humans across different companies and different AI frameworks.
 
-This project was built for the [Band of Agents Hackathon](https://lablab.ai/ai-hackathons/band-of-agents-hackathon).
-
 ---
 
-## Basic information
-
-**Project title:** ClaimArbiter
-
-**Short description:**
-A team of AI agents that adjudicates an insurance claim from intake to a human's final sign-off, automatically recruiting the right outside specialist (property, medical, or legal) across company boundaries on Band.
-
-**Long description:**
-
-ClaimArbiter shows how an insurance claim can move from filing to a signed decision in minutes, with AI agents doing the legwork and a human keeping the final say.
-
-The problem: insurers rarely employ the specialists they rely on. So a claim usually waits in a queue, gets emailed to an outside assessor, and comes back days later with no shared record of who decided what.
-
-The solution: ClaimArbiter compresses that cycle into one live workspace. Intake reads the claim and classifies its domain. An Evidence Analyst inspects the photos and documents. A Case Coordinator recruits the matching property, medical, or legal specialist across a company boundary, with consent. The specialist returns an approve or deny recommendation, and a human reviewer signs it back into the same room. Every message, handoff, and decision is stored in Band as a tamper-evident audit trail you can replay and verify.
-
-The target audience is insurers and claims teams who want faster, auditable decisions, plus anyone building multi-agent systems that must cross company and framework boundaries.
-
-What makes it unique: the specialist routing is real, not scripted. The same system sends a water-damage claim to a property assessor, an injury claim to a medical reviewer, and a legal-expense claim to a legal reviewer. The agents are built with three different AI frameworks and run on different AI models, yet they collaborate in one shared room with a human in the loop.
-
-**Technology tags:** Band, Multi-Agent Systems, Python, FastAPI, Next.js, React, CrewAI, LangGraph, Pydantic AI, AI/ML API, GPT-4o, Featherless, Llama 3.1, Docker
-
-**Category tags:** InsurTech, Insurance Automation, Agent Orchestration, Cross-Org Collaboration, Human-in-the-Loop, Audit and Compliance
+<p align="center">
+  <a href="https://youtu.be/5VclSdY5ILM">
+    <img 
+      src="https://img.youtube.com/vi/5VclSdY5ILM/maxresdefault.jpg" 
+      alt="ClaimArbiter Demo Video" 
+      width="100%" 
+      style="max-width: 1000px;"
+    />
+  </a>
+  <br/>
+  <em>▶ Click to watch the 6 min demo on YouTube</em>
+</p>
 
 ---
 
