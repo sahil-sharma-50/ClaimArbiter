@@ -32,7 +32,10 @@ services:
     # and the filename field rejects slashes — so add the Secret File as the bare name
     # "agent_config.yaml"). The gateway reads ./agent_config.yaml from its workdir
     # (/app), so copy the mounted secret into place before launching.
-    dockerCommand: sh -c "cp /etc/secrets/agent_config.yaml /app/agent_config.yaml && uv run python gateway/main.py"
+    # NOTE: Render already runs dockerCommand through a shell — do NOT wrap it in
+    # `sh -c "..."` yourself, or the nested quotes make the whole string one bogus
+    # command name (exit 127). Give the raw command; && and redirection work as-is.
+    dockerCommand: cp /etc/secrets/agent_config.yaml /app/agent_config.yaml && uv run python gateway/main.py
     envVars:
       - key: GATEWAY_PORT
         value: "10000"       # Render's default injected port; gateway binds GATEWAY_PORT
