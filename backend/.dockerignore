@@ -1,0 +1,13 @@
+.venv
+__pycache__
+*.pyc
+.pytest_cache
+.mypy_cache
+.ruff_cache
+.git
+.gitignore
+.DS_Store
+.env
+agent_config.yaml
+.active_chat_id
+data

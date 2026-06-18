@@ -1,0 +1,37 @@
+{
+  "claim_id": "CLM-2026-0512",
+  "domain": "legal",
+  "claim_type": "legal-fees",
+  "policy_id": "POL-MER-BL-7734",
+  "incident_date": "2026-04-15",
+  "reported_date": "2026-05-12",
+  "parties": {
+    "claimant": {
+      "name": "Marcus Whitlock",
+      "phone": "+1-555-0198",
+      "address": "402 Harbor Commerce Blvd, Suite 210"
+    },
+    "law_firm": {
+      "name": "Crane & Voss LLP",
+      "matter": "Whitlock Trading Co. v. Halberd Supply Inc."
+    }
+  },
+  "damage": {
+    "description": "Attorney fees and litigation costs incurred defending a commercial supply-contract dispute",
+    "photos": [],
+    "estimated_repair": 0
+  },
+  "loss_amount": 48500,
+  "deductible": 1000,
+  "supporting_document": "police_report.pdf",
+  "review_signals": ["matter_outside_policy", "fees_unreasonable"],
+  "signal_detail": {
+    "matter_outside_policy": {
+      "note": "Litigation is a business-to-business breach-of-contract dispute over a wholesale supply agreement, not a covered liability or personal legal matter"
+    },
+    "fees_unreasonable": {
+      "note": "Law firm invoice bills for the full contract-dispute litigation including discovery and motion practice on a commercial matter the policy does not cover"
+    }
+  },
+  "narrative": "Claimant requests reimbursement of $48,500 in attorney fees and litigation costs invoiced by Crane & Voss LLP for ongoing commercial litigation, Whitlock Trading Co. v. Halberd Supply Inc. The dispute concerns an alleged breach of a wholesale supply contract between two businesses, including disputed delivery terms and damages for lost revenue. The submitted law-firm invoice itemizes deposition prep, discovery review, and motion drafting for this business contract dispute. Claimant seeks the insurer to cover the legal fees for prosecuting this commercial contract claim against the counterparty."
+}

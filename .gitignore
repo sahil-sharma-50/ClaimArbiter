@@ -1,3 +1,24 @@
+# macOS
+.DS_Store
+
+# Editor / AI assistant local config (per-developer, may hold local secrets)
+.claude/
+.cursor/
+
+# Playwright MCP scratch dir (screenshots / page snapshots from local testing)
+.playwright-mcp/
+
+# Superpowers brainstorm scratch dir (visual-companion mockups, local only)
+.superpowers/
+
+# Node (frontend) — full rules live in frontend/.gitignore
+node_modules/
+.next/
+
+# Python packaging dirs at repo root only (do not ignore frontend/dashboard/lib)
+/lib/
+/lib64/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
@@ -14,9 +35,6 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
-lib64/
-parts/
 sdist/
 var/
 wheels/
@@ -150,6 +168,7 @@ activemq-data/
 # Environments
 .env
 .envrc
+agent_config.yaml
 .venv
 env/
 venv/
@@ -216,3 +235,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Demo runtime artifact — the active live-chat UUID written by seed/run_demo.py
+.active_chat_id
+.agents/

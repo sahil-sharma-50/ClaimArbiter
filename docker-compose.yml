@@ -1,0 +1,35 @@
+services:
+  gateway:
+    build: ./backend
+    command: ["uv", "run", "python", "gateway/main.py"]
+    env_file: .env
+    environment:
+      ARBITER_STATE_DIR: /app/data
+      GATEWAY_PORT: "8080"
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./agent_config.yaml:/app/agent_config.yaml:ro
+      - arbiter-state:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8080/api/state"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 15s
+    restart: unless-stopped
+
+  dashboard:
+    build:
+      context: ./frontend
+      args:
+        NEXT_PUBLIC_GATEWAY_URL: http://localhost:8080
+    ports:
+      - "3000:3000"
+    depends_on:
+      gateway:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  arbiter-state:

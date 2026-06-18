@@ -1,0 +1,36 @@
+# Copy to agent_config.yaml and fill in credentials from app.band.ai/agents
+#
+# The Case Coordinator discovers specialists via lookup_peers and recruits the one
+# whose capability TAG matches the claim domain. Set these tags in the Band web
+# UI on each specialist agent (there is no API to set tags):
+#   property_agent  -> tag "property-damage"
+#   medical_agent   -> tag "medical-review"
+#   legal_agent     -> tag "legal-review"
+# All three specialists run on Featherless (open-weight). Intake + Case Coordinator
+# run on AI/ML API.
+
+# Get your keys from https: https://app.band.ai/agents/
+
+intake_coverage:
+  agent_id: "<uuid>"
+  api_key: "<key>"
+
+evidence_analyst:
+  agent_id: "<uuid>"
+  api_key: "<key>"
+
+case_coordinator:
+  agent_id: "<uuid>"
+  api_key: "<key>"
+
+property_agent:
+  agent_id: "<uuid>"
+  api_key: "<key>"
+
+medical_agent:
+  agent_id: "<uuid>"
+  api_key: "<key>"
+
+legal_agent:
+  agent_id: "<uuid>"
+  api_key: "<key>"

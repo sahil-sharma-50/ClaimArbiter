@@ -1,0 +1,43 @@
+{
+  "claim_id": "CLM-2026-0408",
+  "domain": "medical",
+  "claim_type": "medical-injury",
+  "policy_id": "POL-MER-AH-9920",
+  "incident_date": "2026-05-21",
+  "reported_date": "2026-05-26",
+  "parties": {
+    "claimant": {
+      "name": "Eli Brandt",
+      "phone": "+1-555-0150",
+      "date_of_birth": "1989-03-12"
+    },
+    "provider": {
+      "name": "Lakeside Orthopedic & Imaging",
+      "npi": "1992847613"
+    }
+  },
+  "treatment": {
+    "reported_injury": "Soft-tissue neck strain from a rear-end auto collision",
+    "billed_items": [
+      "ER evaluation",
+      "cervical X-ray",
+      "lumbar MRI",
+      "8 physical-therapy sessions"
+    ],
+    "documents": ["intake_chart.pdf", "imaging_order.pdf"],
+    "estimated_billing": 9200
+  },
+  "loss_amount": 14600,
+  "deductible": 750,
+  "supporting_document": "intake_chart.pdf",
+  "review_signals": ["treatment_injury_mismatch", "unsupported_procedure"],
+  "signal_detail": {
+    "treatment_injury_mismatch": {
+      "note": "Lumbar MRI billed for a reported cervical (neck) injury; no documented lower-back complaint"
+    },
+    "unsupported_procedure": {
+      "note": "Imaging order does not reference the lumbar study; procedure appears unsupported by the chart"
+    }
+  },
+  "narrative": "Claimant reports neck strain following a rear-end collision and submits billing for ER evaluation, cervical and lumbar imaging, and physical therapy. Billed total exceeds the provider's own estimate."
+}

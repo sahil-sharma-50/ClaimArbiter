@@ -1,0 +1,34 @@
+{
+  "claim_id": "CLM-2026-0317",
+  "domain": "property",
+  "claim_type": "property-water-damage",
+  "policy_id": "POL-MER-HO-4471",
+  "incident_date": "2026-05-30",
+  "reported_date": "2026-06-01",
+  "parties": {
+    "claimant": {
+      "name": "Priya Anand",
+      "phone": "+1-555-0173",
+      "property_address": "118 Cedar Hollow Rd, Unit 4"
+    }
+  },
+  "damage": {
+    "description": "Water damage to kitchen subfloor, lower cabinets, and adjoining drywall",
+    "affected_areas": ["kitchen", "hallway"],
+    "photos": ["water_kitchen.jpg", "water_cabinets.jpg", "moisture_meter.jpg"],
+    "estimated_repair": 28400
+  },
+  "loss_amount": 34000,
+  "deductible": 1000,
+  "supporting_document": "plumber_report.pdf",
+  "review_signals": ["water_source_ambiguous", "moisture_predates_loss"],
+  "signal_detail": {
+    "water_source_ambiguous": {
+      "note": "Reported as sudden supply-line burst, but plumber notes corrosion consistent with slow long-term leak"
+    },
+    "moisture_predates_loss": {
+      "note": "Moisture-meter readings and subfloor staining indicate intrusion began weeks before reported incident_date"
+    }
+  },
+  "narrative": "Claimant reports a sudden kitchen supply-line burst causing extensive water damage. Requests full subfloor and cabinet replacement at an amount above the documented repair estimate."
+}
