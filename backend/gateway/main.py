@@ -133,7 +133,7 @@ async def _validate_provider_key(provider: str, api_key: str) -> None:
         DEFAULT_AIML_MODEL if provider == "aiml" else DEFAULT_FEATHERLESS_MODEL
     )
     try:
-        async with httpx.AsyncClient(timeout=15.0) as client:
+        async with httpx.AsyncClient(timeout=60.0) as client:
             r = await client.post(
                 f"{base_url}/chat/completions",
                 headers={
