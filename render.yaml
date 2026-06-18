@@ -1,0 +1,59 @@
+# Render Blueprint for ClaimArbiter — the GATEWAY only (free tier).
+# The frontend deploys to Vercel separately (see docs/DEPLOY_RENDER.md).
+#
+# The gateway is a FastAPI service that ALSO spawns + supervises the agent group
+# itself (gateway/agent_runner.py) — do NOT run the agents separately. It must stay
+# a single instance: Band allows one live connection per agent identity, so a
+# scaled-out gateway would open duplicate connections and break the workflow.
+#
+# After the first deploy, in the Render dashboard set:
+#   - Environment secrets: AIML_API_KEY, FEATHERLESS_API_KEY,
+#                          HUMAN_REVIEWER_USER_ID, HUMAN_REVIEWER_USER_API_KEY
+#   - Secret File: agent_config.yaml  ->  mount path /app/agent_config.yaml
+#
+# Free tier notes: the service spins down after 15 min idle (first request after
+# that takes ~1 min to wake), and free services can't mount a persistent disk — so
+# there's no disk here. That's fine: Band is the source of truth and the gateway
+# rebuilds room state from it. Only uploaded evidence files don't survive a restart,
+# which doesn't affect the built-in demo claims. Switch plan to "starter" (~$7/mo)
+# and add a disk block if you want always-on + persistence.
+
+services:
+  - type: web
+    name: claimarbiter-gateway
+    runtime: docker
+    plan: free
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    numInstances: 1          # NEVER scale — one Band connection per agent identity
+    healthCheckPath: /api/health
+    envVars:
+      - key: GATEWAY_PORT
+        value: "10000"       # Render's default injected port; gateway binds GATEWAY_PORT
+      - key: GATEWAY_POLL_SECONDS
+        value: "1.5"
+      - key: SEED_CAP_PER_HOUR
+        value: "30"          # per-IP hourly cap on runs — bounds LLM spend
+      - key: THENVOI_REST_URL
+        value: https://app.band.ai/
+      - key: THENVOI_WS_URL
+        value: wss://app.band.ai/api/v1/socket/websocket
+      - key: AIML_BASE_URL
+        value: https://api.aimlapi.com/v1
+      - key: AIML_MODEL
+        value: gpt-4o
+      - key: FEATHERLESS_BASE_URL
+        value: https://api.featherless.ai/v1
+      - key: FEATHERLESS_MODEL
+        value: meta-llama/Meta-Llama-3.1-8B-Instruct
+      - key: FEATHERLESS_VISION_MODEL
+        value: google/gemma-4-31B-it
+      # --- secrets: set in the Render dashboard, not committed ---
+      - key: AIML_API_KEY
+        sync: false
+      - key: FEATHERLESS_API_KEY
+        sync: false
+      - key: HUMAN_REVIEWER_USER_ID
+        sync: false
+      - key: HUMAN_REVIEWER_USER_API_KEY
+        sync: false
